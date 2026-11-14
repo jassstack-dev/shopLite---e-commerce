@@ -4,9 +4,9 @@ import Navbar from '../../shared/ui/components/Navbar'
 const MainLayout = () => {
   return <div>
     <Navbar/>
-    {/* <div>
+    <div>
         <Outlet/>
-    </div> */}
+    </div>
   </div>
 }
 

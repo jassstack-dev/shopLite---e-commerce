@@ -3,7 +3,7 @@ import React from 'react'
 
 const Navbar = () => {
   return (
-    <nav className='bg-white px-10 py-6 grid grid-cols-3 items-center text-neutral-900'>
+    <nav className='bg-white px-10 py-6 grid grid-cols-3 items-center text-neutral-900 '>
       {/* Left: Asymmetric Minimal Menu Lines */}
       <div className='justify-self-start'>
         <button className='flex flex-col gap-[3.5px] py-2 pr-4 cursor-pointer group'>
