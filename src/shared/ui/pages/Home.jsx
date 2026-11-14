@@ -1,8 +1,6 @@
 import Main from "../components/home/Main";
 import Filter from "../components/home/Filter";
 import Products from "../../../feature/products/ui/pages/Products";
-import { useProductApi } from "../../../feature/products/hooks/useProductApi";
-import { useEffect, useState } from "react";
 import { useSearchFilter } from "../../hooks/searchFilter";
 
 const Home = () => {

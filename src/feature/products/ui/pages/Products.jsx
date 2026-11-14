@@ -3,9 +3,12 @@ import { Opacity } from 'lucide-react';
 import { axiosInstance } from '../../../../app/config/axiosInstance';
 import { useProductApi } from '../../hooks/useProductApi';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
 
 const Products = ({ filteredData }) => {
   const { data,isPending, error, setPages, pages, totalPages,isPlaceholderData  } = useProductApi();
+
+  const navigate = useNavigate()
 
   if(isPending) return <h1>loading data...</h1>
     if(error) return <h1>something went wrong...</h1>
@@ -33,7 +36,7 @@ const Products = ({ filteredData }) => {
             className="group cursor-pointer flex flex-col"
           >
             {/* Image Container */}
-            <div className="relative aspect-[4/4.6] w-full bg-[#EDEDED] overflow-hidden">
+            <div onClick={()=> navigate(`/products/${product.id}`)} className="relative aspect-[4/4.6] w-full bg-[#EDEDED] overflow-hidden">
               <img
                 src={product.thumbnail}
                 alt={product.title}

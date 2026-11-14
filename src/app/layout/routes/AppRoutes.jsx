@@ -1,10 +1,13 @@
 import React from 'react'
-import { createBrowserRouter, RouterProvider } from 'react-router'
+import { createBrowserRouter, RouterProvider, useParams } from 'react-router'
 import MainLayout from '../mainLayout'
 import Home from '../../../shared/ui/pages/Home'
+import ProductDetails from '../../../feature/products/ui/pages/ProductDetails'
+import Cart from '../../../feature/carts/ui/pages/Cart'
 
 const AppRoutes = () => {
 
+   
     const router = createBrowserRouter([
         {
             path:'/',
@@ -13,6 +16,14 @@ const AppRoutes = () => {
                 {
                     path: '',
                     element:<Home/>
+                },
+                {
+                    path:`products/:id`,
+                    element:<ProductDetails/>
+                },
+                {
+                    path:'products/cart',
+                    element:<Cart/>
                 }
             ]
         }
