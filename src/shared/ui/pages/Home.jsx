@@ -7,6 +7,7 @@ import { useSearchFilter } from "../../hooks/searchFilter";
 
 const Home = () => {
   const {
+    data,
     search,
     setSearch,
     filteredData,
@@ -31,7 +32,7 @@ const Home = () => {
         sortBy={sortBy}
         setSortBy={setSortBy}
       />
-      <Products filteredData={filteredData} />
+      <Products data={data}  filteredData={filteredData} />
     </div>
   );
 };

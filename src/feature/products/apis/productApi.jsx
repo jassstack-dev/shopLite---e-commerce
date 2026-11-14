@@ -1,9 +1,10 @@
+import { useState } from "react"
 import { axiosInstance } from "../../../app/config/axiosInstance"
 
-export const productApis =async ()=>{
-    try {
+export const productApis =async (limit, pages)=>{
 
-        const res = await axiosInstance.get('/products?limit=194')
+    try {
+        const res = await axiosInstance.get(`/products?limit=${limit}&skip=${pages * limit}`)
         return res.data
     } catch (error) {
         console.log('error in product api is', error)
@@ -21,10 +22,3 @@ export const filterByCategoryApis =async ()=>{
     }
 }
 
-export const paginationFilter = async (limit , skip ) => {
-  const res = await axiosInstance.get(
-    `/products?limit=${limit}&skip=${skip}`
-  );
-
-  return res.data;
-};

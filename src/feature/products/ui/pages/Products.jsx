@@ -1,14 +1,16 @@
 
+import { Opacity } from 'lucide-react';
+import { axiosInstance } from '../../../../app/config/axiosInstance';
 import { useProductApi } from '../../hooks/useProductApi';
-import { useQuery } from '@tanstack/react-query';
-import { paginationFilter } from '../../apis/productApi';
+import { useEffect, useState } from 'react';
 
 const Products = ({ filteredData }) => {
-  const { data, isPending, isError, error } = useProductApi();
+  const { data,isPending, error, setPages, pages, totalPages,isPlaceholderData  } = useProductApi();
 
-  if (isPending) return <h1>Loading data...</h1>;
+  if(isPending) return <h1>loading data...</h1>
+    if(error) return <h1>something went wrong...</h1>
 
-  if (isError) return <h1>{error.message}</h1>;
+
 
   const products = filteredData ?? data?.products ?? [];
 
@@ -16,9 +18,14 @@ const Products = ({ filteredData }) => {
 
 
 
+
+
+
   return (
     <section className="bg-white px-10 py-6 text-neutral-900">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div
+      style={{opacity: isPlaceholderData ? 0.3 : 1}}
+       className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
         {products.map((product) => (
           <div
@@ -58,6 +65,26 @@ const Products = ({ filteredData }) => {
         )}
 
       </div>
+      <div className="flex justify-center gap-10 mt-10 items-center">
+  <button
+    disabled={pages === 0}
+    onClick={() => setPages(pages - 1)}
+    className="bg-red-700 text-white p-4 rounded-xl disabled:opacity-40"
+  >
+    Prev
+  </button>
+
+  <p>Page {pages + 1} of {totalPages}</p>
+
+  <button
+    disabled={pages + 1 >= totalPages}
+    onClick={() => setPages(pages + 1)}
+    className="bg-red-700 text-white p-4 rounded-xl disabled:opacity-40"
+  >
+    Next
+  </button>
+</div>
+      
     </section>
   );
 };

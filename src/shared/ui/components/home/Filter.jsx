@@ -1,7 +1,5 @@
 import { Search, ChevronDown } from "lucide-react";
-import { filterByCategoryApis } from "../../../../feature/products/apis/productApi";
-import { useSearchFilter } from "../../../hooks/searchFilter";
-import { useState } from "react";
+
 
 const Filter = ({
   filteredData,
