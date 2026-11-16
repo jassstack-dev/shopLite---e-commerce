@@ -10,6 +10,8 @@ export const useProductDetails = () => {
   const [notFound, setNotFound] = useState(false);
   console.log(notFound);
 
+  console.log('products in hooks --->',product)
+
   const [activeImg, setActiveImg] = useState(0);
 
   const navigate = useNavigate();

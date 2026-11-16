@@ -35,17 +35,19 @@ const Navbar = () => {
         <div className='hidden md:flex items-center gap-7'>
           <p className='hover:text-neutral-400 transition-colors cursor-pointer'>Search</p>
           <p className='hover:text-neutral-400 transition-colors cursor-pointer'>Help</p>
-          <p className='hover:text-neutral-400 transition-colors cursor-pointer'>My account</p>
-        </div>
+          <NavLink to={'/auth/login'} className='hover:text-neutral-400 transition-colors cursor-pointer'>My account</NavLink>
+        </div>NavLink
 
         <NavLink
           to={'products/cart'}
           className='relative flex items-center cursor-pointer group ml-1'
         >
           <ShoppingBag className='w-[17px] h-[17px] stroke-[1.6] text-neutral-900 group-hover:opacity-70 transition-opacity' />
-          <span className='absolute -top-1.5 -right-2 bg-neutral-900 text-white text-[9px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center'>
+          {
+            cartItems.length === 0 ? <span></span> : <span className='absolute -top-1.5 -right-2 bg-neutral-900 text-white text-[9px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center'>
             {cartItems.length}
           </span>
+          }
         </NavLink>
       </div>
 
