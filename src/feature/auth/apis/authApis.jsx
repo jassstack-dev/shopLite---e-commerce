@@ -11,8 +11,11 @@ export const authApis = async (credentials) => {
   }
 };
 
-export const hydrateApis =async (accessToken) =>{
+export const authMe = async () =>{
+
+  const accessToken = localStorage.getItem('accessToken')
     try {
+      if(!accessToken) return 
 
         const res = await axiosInstance.get('/auth/me', {
             headers :{

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { createBrowserRouter, RouterProvider, useNavigate, useParams } from "react-router";
+import { createBrowserRouter, RouterProvider } from "react-router";
 import MainLayout from "../mainLayout";
 import Home from "../../../shared/ui/pages/Home";
 import ProductDetails from "../../../feature/products/ui/pages/ProductDetails";
@@ -7,38 +7,41 @@ import Cart from "../../../feature/carts/ui/pages/Cart";
 import Login from "../../../feature/auth/ui/pages/Login";
 import PublicRoutes from "../PublicRoutes";
 import Register from "../../../feature/auth/ui/pages/Register";
-import { hydrateApis } from "../../../feature/auth/apis/authApis";
-import { useDispatch, useSelector } from "react-redux";
+import { authMe } from "../../../feature/auth/apis/authApis";
+import { useDispatch, useSelector, } from "react-redux";
 import { loginUserAction } from "../../../feature/auth/store/authSlice";
 import ProtectedRoutes from "../ProtectedRoutes";
 import Checkout from "../../../feature/checkout/ui/pages/Checkout";
 
 const AppRoutes = () => {
-//   const dispatch = useDispatch();
+
+  const dispatch = useDispatch()
+  // const {user} = useSelector((state)=>state.auth)
+  // console.log(user)
+
+  const hydrateApi = async ()=>{
+
+    try {
+
+      
+
+      const res = await authMe()
+      console.log('response of hydrate api', res)
+      dispatch(loginUserAction(res))
+      
 
 
-//   const {accessToken} = useSelector((state) => state.auth);
+      
+    } catch (error) {
+      console.log('error in the hydrate api', error)
+    }
 
-//   const callHydrateApi = async () => {
-//     if (!accessToken) return;
+  }
 
-//     try {
-//       const res = await hydrateApis(accessToken);
+  useEffect(()=>{
+    hydrateApi()
+  },[dispatch])
 
-//       if (res) {
-//         dispatch(loginUserAction(res));
-//       }
-
-       
-//       console.log('user logged in')
-//     } catch (error) {
-//       console.log("error in hydration api while calling-->", error);
-//     }
-//   };
-
-//   useEffect(() => {
-//     callHydrateApi();
-//   }, [dispatch, accessToken]);
 
   const router = createBrowserRouter([
     {

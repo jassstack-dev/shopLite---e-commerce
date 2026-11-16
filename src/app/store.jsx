@@ -16,11 +16,8 @@ store.subscribe(() => {
 
   console.log(state);
 
-  const accessToken = state.auth.accessToken;
 
   localStorage.setItem("cart", JSON.stringify(state.cart.cartItems));
 
-  if(accessToken){
-    localStorage.setItem("accessToken", accessToken);
-  }
+
 });

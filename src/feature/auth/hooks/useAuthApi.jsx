@@ -19,14 +19,12 @@ export const useAuth = () => {
   const loginUser = async (credentials) => {
     try {
       const response = await authApis(credentials);
-      dispatch(loginUserAction({
-         user: response,
-  accessToken: response.accessToken,
-  refreshToken: response.refreshToken
-      }));
-      console.log("2. REDIRECTING...");
+      dispatch(loginUserAction(response));
+      localStorage.setItem('accessToken', response.accessToken)
+      
 
-    navigate("/checkout");
+
+    alert('user logged in successfully')
         
 
       return response;
