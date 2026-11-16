@@ -9,15 +9,30 @@ const Cart = () => {
 
     const cartItems = useSelector((state)=> state.cart.cartItems)
 console.log(cartItems.length)
+console.log('CART-ITEMS-->',cartItems)
+
+const total = cartItems.reduce((sum, item) => {
+  return sum + item.price;
+}, 0);
+
+console.log('jass price is --->', jass)
+
+
+
+
+
 
 
 const [closeCart, setCloseCart] = useState(false)
 
 
 
+
 if (closeCart === true) {
     return <Navigate to="/" replace />;
 }
+
+
 
 
 
@@ -68,7 +83,7 @@ if (closeCart === true) {
                     return <div className='flex items-center justify-between gap-4'>
               <div className='flex items-center gap-3.5'>
                 <img
-                  src='https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?auto=format&fit=crop&w=200&q=80'
+                  src={items.images}
                   alt='Area Lo Sneaker'
                   className='w-16 h-18 rounded-md object-cover bg-[#EDEDED]'
                 />
@@ -149,7 +164,7 @@ if (closeCart === true) {
                     Cleaning Kit
                   </p>
                   <p className='text-[11.5px] font-medium text-neutral-600 mt-0.5'>
-                    €25.00
+                    $25.00
                   </p>
                 </div>
               </div>

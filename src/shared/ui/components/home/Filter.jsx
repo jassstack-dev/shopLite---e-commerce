@@ -1,6 +1,5 @@
 import { Search, ChevronDown } from "lucide-react";
 
-
 const Filter = ({
   filteredData,
   setSearch,
@@ -9,35 +8,30 @@ const Filter = ({
   setSelectedCategory,
   CategoriesData,
   sortBy,
-  setSortBy
-  
+  setSortBy,
 }) => {
-
-
-  
-
   return (
-    <div className="bg-white  py-10 flex justify-between items-center text-neutral-900">
-      {/* Left: Filter by Search & Category */}
-      <div className="flex items-center gap-4">
+    <div className="bg-white py-6 sm:py-8 md:py-10 px-4 sm:px-6 md:px-0 flex flex-col md:flex-row md:justify-between gap-4 md:gap-6 md:items-center text-neutral-900">
+      {/* Left: Search & Category */}
+      <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 w-full md:w-auto">
         {/* Search Box */}
-        <div className="relative flex items-center">
+        <div className="relative flex items-center w-full sm:w-auto">
           <Search className="w-3.5 h-3.5 text-neutral-400 absolute left-3.5 pointer-events-none stroke-[1.75]" />
           <input
             type="text"
             value={search}
             placeholder="Search products..."
             onChange={(e) => setSearch(e.target.value)}
-            className="pl-9 pr-4 py-2 text-[12px] text-neutral-800 placeholder:text-neutral-400 bg-white border border-neutral-200 focus:border-neutral-900 focus:outline-none transition-colors w-60"
+            className="pl-9 pr-4 py-2 text-[12px] text-neutral-800 placeholder:text-neutral-400 bg-white border border-neutral-200 focus:border-neutral-900 focus:outline-none transition-colors w-full sm:w-60"
           />
         </div>
 
         {/* Category Selector */}
-        <div className="relative flex items-center">
+        <div className="relative flex items-center w-full sm:w-auto">
           <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
-            className="appearance-none bg-white border border-neutral-200 hover:border-neutral-400 focus:border-neutral-900 focus:outline-none px-4 py-2 pr-9 text-[12px] font-medium text-neutral-800 cursor-pointer transition-colors"
+            className="appearance-none bg-white border border-neutral-200 hover:border-neutral-400 focus:border-neutral-900 focus:outline-none px-4 py-2 pr-9 text-[12px] font-medium text-neutral-800 cursor-pointer transition-colors w-full sm:w-auto"
           >
             <option value="all">All Categories</option>
             {CategoriesData?.map((val) => {
@@ -53,11 +47,11 @@ const Filter = ({
       </div>
 
       {/* Right: Sort */}
-      <div className="relative flex items-center">
+      <div className="relative flex items-center w-full sm:w-auto md:w-auto">
         <select
           value={sortBy}
           onChange={(e) => setSortBy(e.target.value)}
-          className="appearance-none bg-white border border-neutral-200 hover:border-neutral-400 focus:border-neutral-900 focus:outline-none px-4 py-2 pr-9 text-[12px] font-medium text-neutral-800 cursor-pointer transition-colors"
+          className="appearance-none bg-white border border-neutral-200 hover:border-neutral-400 focus:border-neutral-900 focus:outline-none px-4 py-2 pr-9 text-[12px] font-medium text-neutral-800 cursor-pointer transition-colors w-full sm:w-auto"
         >
           <option value="featured">Sort by: Featured</option>
           <option value="low-high">Price: Low to High</option>
