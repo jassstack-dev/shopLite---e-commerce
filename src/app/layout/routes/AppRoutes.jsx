@@ -12,6 +12,8 @@ import { useDispatch, useSelector, } from "react-redux";
 import { loginUserAction } from "../../../feature/auth/store/authSlice";
 import ProtectedRoutes from "../ProtectedRoutes";
 import Checkout from "../../../feature/checkout/ui/pages/Checkout";
+import Profile from "../../../feature/profile/ui/pages/Profile";
+import Payments from "../../../feature/payment/ui/pages/Payments";
 
 const AppRoutes = () => {
 
@@ -85,6 +87,26 @@ const AppRoutes = () => {
                 element:<Checkout/>
             }
         ]
+    },
+    {
+      path:'profile',
+      element:<ProtectedRoutes/>,
+      children:[
+         {
+              path:'',
+              element:<Profile/>
+            }
+      ]
+    },
+     {
+      path:'payments',
+      element:<ProtectedRoutes/>,
+      children:[
+         {
+              path:'',
+              element:<Payments/>
+            }
+      ]
     }
   ]);
 

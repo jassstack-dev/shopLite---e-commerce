@@ -8,9 +8,7 @@ const PublicRoutes = () => {
 
   if (isLoading) return <p>Checking authentication...</p>;
 
-  if (user) return <Navigate to="/checkout" replace />;
-
-
+  if (user) return <Navigate to="/" replace />;
 
   return <Outlet/>
 }

@@ -7,6 +7,8 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false)
 
   const cartItems = useSelector((state)=> state.cart.cartItems)
+  const {user} = useSelector((state)=> state.auth)  
+  console.log('user redux state maiu hai -->', user)
 
 
   return (
@@ -35,7 +37,23 @@ const Navbar = () => {
         <div className='hidden md:flex items-center gap-7'>
           <p className='hover:text-neutral-400 transition-colors cursor-pointer'>Search</p>
           <p className='hover:text-neutral-400 transition-colors cursor-pointer'>Help</p>
-          <NavLink to={'/auth/login'} className='hover:text-neutral-400 transition-colors cursor-pointer'>My account</NavLink>
+          {
+  user ? (
+    <NavLink
+      to="/profile"
+      className="hover:text-neutral-400 transition-colors cursor-pointer"
+    >
+      Profile
+    </NavLink>
+  ) : (
+    <NavLink
+      to="/auth/login"
+      className="hover:text-neutral-400 transition-colors cursor-pointer"
+    >
+      My account
+    </NavLink>
+  )
+}
         </div>NavLink
 
         <NavLink

@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { X, Truck, ChevronLeft, ChevronRight, Plus, Minus } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate, useParams } from "react-router";
+import { Navigate, useNavigate, useParams } from "react-router";
 import { decreaseQuantity, increaseQuantity, removeCartItem } from "../../store/cartSlice";
 import EmptyCart from "../components/Emptycart";
 
 const Cart = () => {
 
   const cartItems = useSelector((state) => state.cart.cartItems);
+  const navigate = useNavigate()
   const dispatch = useDispatch();
   // console.log(cartItems.length);
   console.log("CART-ITEMS-->", cartItems);
@@ -204,15 +205,14 @@ const Cart = () => {
             </span>
             <div className="flex items-baseline gap-2">
               <span className="text-[19px] font-semibold text-neutral-900">
-                ${(totalAmount - ((totalAmount * 10)/100)).toFixed(2)}
+                ${totalAmount.toFixed(2)}
               </span>
-              <span className="text-[12px] text-neutral-400 line-through">
-                ${(totalAmount).toFixed(2)}
-              </span>
+             
             </div>
           </div>
 
           <button
+          onClick={()=>navigate('/checkout')}
             type="button"
             className="w-full bg-[#1C1C1C] hover:bg-black text-white text-[12px] font-semibold uppercase tracking-widest py-3.5 rounded-full transition-colors cursor-pointer"
           >

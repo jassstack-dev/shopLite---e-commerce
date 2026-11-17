@@ -1,12 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { Navigate } from 'react-router';
 
 const ShippingAddress = () => {
   const { register, handleSubmit } = useForm();
+  const [address, setAddress] = useState(JSON.parse(localStorage.getItem('address'))||[])
+  console.log(address)
+
+  // if(address){
+  //   return <Navigate to={'/payments'} />
+  // }else{
+  //   return
+  // }
+
 
   const onSubmit = (data) => {
     console.log('Shipping Data:', data);
-    alert('Shipping Address Submitted!');
+
+    const arr = [...address, data]
+    setAddress(arr)
+    localStorage.setItem('address', JSON.stringify(arr))
+        alert('Shipping Address Submitted!');
   };
 
   return (
