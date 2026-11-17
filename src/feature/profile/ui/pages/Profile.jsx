@@ -26,21 +26,21 @@ const Profile = () => {
 
         {/* Header */}
         
-
+<LoginUser/>
         <div className="grid grid-cols-1 gap-7 lg:grid-cols-3">
 
           {/* User Profile */}
-          <LoginUser/>
+              <Address/>
           
 
           {/* Right Section */}
           <div className="space-y-7 lg:col-span-2">
 
             {/* Address */}
-            <Address/>
+                <Order/>
 
             {/* Orders */}
-           <Order/>
+   
 
           </div>
         </div>

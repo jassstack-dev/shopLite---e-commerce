@@ -25,6 +25,26 @@ const Address = () => {
   return (
     <section className="rounded-2xl border border-neutral-200 bg-white p-6">
 
+        <div className="grid grid-cols-2 gap-4 mb-2">
+
+              <div className="rounded-2xl border border-neutral-200 bg-white p-5">
+                <Package size={20} className="text-neutral-500" />
+                <h3 className="mt-3 text-2xl font-bold text-neutral-900">
+                  12
+                </h3>
+                <p className="text-xs text-neutral-500">Total Orders</p>
+              </div>
+
+              <div className="rounded-2xl border border-neutral-200 bg-white p-5">
+                <MapPin size={20} className="text-neutral-500" />
+                <h3 className="mt-3 text-2xl font-bold text-neutral-900">
+                  {address.length}
+                </h3>
+                <p className="text-xs text-neutral-500">Saved Addresses</p>
+              </div>
+
+            </div>
+
               <div className="mb-6 flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className="rounded-xl bg-neutral-100 p-3">
@@ -52,7 +72,7 @@ const Address = () => {
 
               {
                 address.map((item)=>{
-                    return <div className="grid gap-2 sm:grid-cols-2 ">
+                    return <div className="mb-2 ">
 
                 <div className="rounded-xl border border-neutral-200 p-5">
 
@@ -66,16 +86,15 @@ const Address = () => {
                   </div>
 
                   <h3 className="font-semibold text-neutral-900">
-                    Vimal Jass
+                    {item.firstName} {item.lastName}
                   </h3>
 
                   <p className="mt-2 text-sm leading-6 text-neutral-500">
-                    House No. 24, Main Road,
-                    Bhogal, New Delhi, Delhi - 110014
+                    {item.city}, {item.state}, {item.zipCode}
                   </p>
 
                   <p className="mt-3 text-sm text-neutral-600">
-                    +91 98765 43210
+                    {item.phone}
                   </p>
 
                 </div>

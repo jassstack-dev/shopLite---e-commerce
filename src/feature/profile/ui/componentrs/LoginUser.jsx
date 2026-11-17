@@ -85,25 +85,7 @@ const LoginUser = () => {
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-2 gap-4">
-
-              <div className="rounded-2xl border border-neutral-200 bg-white p-5">
-                <Package size={20} className="text-neutral-500" />
-                <h3 className="mt-3 text-2xl font-bold text-neutral-900">
-                  12
-                </h3>
-                <p className="text-xs text-neutral-500">Total Orders</p>
-              </div>
-
-              <div className="rounded-2xl border border-neutral-200 bg-white p-5">
-                <MapPin size={20} className="text-neutral-500" />
-                <h3 className="mt-3 text-2xl font-bold text-neutral-900">
-                  02
-                </h3>
-                <p className="text-xs text-neutral-500">Saved Addresses</p>
-              </div>
-
-            </div>
+            
           </div>}
         </>
   )
