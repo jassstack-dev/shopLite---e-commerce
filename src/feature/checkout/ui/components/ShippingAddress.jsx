@@ -7,11 +7,12 @@ const ShippingAddress = () => {
   const [address, setAddress] = useState(JSON.parse(localStorage.getItem('address'))||[])
   console.log(address)
 
-  // if(address){
-  //   return <Navigate to={'/payments'} />
-  // }else{
-  //   return
-  // }
+  
+  if(address){
+    return <Navigate to={'/payments'} />
+  }else{
+    return
+  }
 
 
   const onSubmit = (data) => {

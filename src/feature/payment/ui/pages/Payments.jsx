@@ -14,6 +14,8 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { clearCart } from '../../../carts/store/cartSlice';
 import { Navigate, useNavigate } from 'react-router';
+import { addOrder } from '../../store/orderSlice';
+
 
 
 
@@ -22,6 +24,8 @@ const Payments = () => {
     const navigate = useNavigate()
   const [paymentMethod, setPaymentMethod] = useState('upi')
     const cartItems = useSelector((state) => state.cart.cartItems);
+     const {user} = useSelector((state)=>state.auth)
+     const {orders} = useSelector((state)=>state.orders)
     const [paymentDetails, setPaymentDetails] = useState({
   upiId: '',
   cardNumber: '',
@@ -87,10 +91,24 @@ return val.id  === paymentMethod
     )
 
 
+
+
     }
 
-    localStorage.setItem('orderPayment', JSON.stringify(orderPayment))
-    console.log(orderPayment)
+    const order = {
+      orderId : Date.now(),
+      userId : user.id,
+      products : [...cartItems],
+      payment: orderPayment,
+      totalAmount: Number((totalPrice * 0.9).toFixed(2)),
+  status: "Processing",
+  orderDate: new Date().toISOString(),
+
+    }
+    
+dispatch(addOrder(order))
+    localStorage.setItem('order', JSON.stringify(order))
+    console.log(order)
     dispatch(clearCart())
 
       alert('Your order placed successfully');
@@ -99,6 +117,15 @@ return val.id  === paymentMethod
      
 
   }
+
+
+  console.log('REDUX USER', user)
+  console.log('REDUX CART-ITEMS', cartItems)
+  console.log('REDUX STORE', orders)
+
+  
+ 
+
 
   return (
     <div className="min-h-screen bg-neutral-50 px-4 py-10 sm:px-8">

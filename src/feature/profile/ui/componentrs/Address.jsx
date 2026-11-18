@@ -23,7 +23,7 @@ const Address = () => {
 
 
   return (
-    <section className="rounded-2xl border border-neutral-200 bg-white p-6">
+    <section className="rounded-2xl border border-neutral-200 bg-white p-6 mt-10">
 
         <div className="grid grid-cols-2 gap-4 mb-2">
 

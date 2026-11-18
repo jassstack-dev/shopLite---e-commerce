@@ -13,11 +13,17 @@ import {
   CalendarDays,
   ChevronRight
 } from 'lucide-react';
+import { useSelector } from 'react-redux';
 
 
 const Order = () => {
+  
+const {orders} = useSelector((state)=>state.orders)
+console.log(orders)
+
+
   return (
-     <section className="rounded-2xl border border-neutral-200 bg-white p-6">
+     <section className="rounded-2xl border border-neutral-200 bg-white p-6 mt-10">
 
               <div className="mb-6 flex items-center justify-between">
                 <div className="flex items-center gap-3">
