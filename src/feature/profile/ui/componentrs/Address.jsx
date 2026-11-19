@@ -14,11 +14,14 @@ import {
   ChevronRight
 } from 'lucide-react';
 import { useNavigate } from 'react-router';
+import { useSelector } from 'react-redux';
 
 const Address = () => {
 
     const navigate = useNavigate()
     const address = JSON.parse(localStorage.getItem('address')) || []
+    const {orders} = useSelector((state)=>state.orders)
+    
 
 
 
@@ -30,7 +33,7 @@ const Address = () => {
               <div className="rounded-2xl border border-neutral-200 bg-white p-5">
                 <Package size={20} className="text-neutral-500" />
                 <h3 className="mt-3 text-2xl font-bold text-neutral-900">
-                  12
+                  {orders.length}
                 </h3>
                 <p className="text-xs text-neutral-500">Total Orders</p>
               </div>

@@ -21,6 +21,18 @@ const Order = () => {
 const {orders} = useSelector((state)=>state.orders)
 console.log(orders)
 
+const selectedAddress = orders?.map((val)=>{
+  return val.selectedAddress
+})
+console.log(selectedAddress)
+
+
+
+const products = orders.map((val)=>{
+  return val.products
+})
+
+console.log(products)
 
   return (
      <section className="rounded-2xl border border-neutral-200 bg-white p-6 mt-10">
@@ -45,119 +57,92 @@ console.log(orders)
                 </button>
               </div>
 
-              <div className="space-y-4">
+              {
+                orders.map((order)=>{
+                  return <div className="space-y-4">
 
                 {/* Order 1 */}
-                <div className="rounded-xl border border-neutral-200 p-5">
+                <div className="rounded-xl border border-neutral-200 p-5 mt-10">
 
                   <div className="flex flex-wrap items-center justify-between gap-3">
                     <div>
                       <p className="text-xs text-neutral-400">Order ID</p>
                       <h3 className="mt-1 text-sm font-semibold text-neutral-900">
-                        #ORD-2026-001
+                        #{order.orderId}
                       </h3>
                     </div>
 
                     <span className="rounded-full bg-green-50 px-3 py-1.5 text-xs font-semibold text-green-700">
-                      Delivered
+                      {order.status}
                     </span>
                   </div>
 
-                  <div className="my-4 flex items-center gap-4 border-y border-neutral-100 py-4">
+                  {order.products.map((product) => (
+  <div
+    key={product.id}
+    className="my-4 flex items-center gap-4 border-y border-neutral-100 py-4"
+  >
+    <div className="h-16 w-16 overflow-hidden rounded-lg bg-neutral-100">
+      <img
+        src={product.thumbnail}
+        alt={product.title}
+        className="h-full w-full object-cover"
+      />
+    </div>
 
-                    <div className="h-16 w-16 overflow-hidden rounded-lg bg-neutral-100">
-                      <img
-                        src="https://placehold.co/100x100"
-                        alt="Product"
-                        className="h-full w-full object-cover"
-                      />
-                    </div>
+    <div className="flex-1">
+      <h4 className="text-sm font-semibold text-neutral-900">
+        {product.title}
+      </h4>
 
-                    <div className="flex-1">
-                      <h4 className="text-sm font-semibold text-neutral-900">
-                        Premium Headphones
-                      </h4>
-                      <p className="mt-1 text-xs text-neutral-500">
-                        Qty: 1 · Black
-                      </p>
-                    </div>
+      <p className="mt-1 text-xs text-neutral-500">
+        Qty: {product.quantity}
+      </p>
+    </div>
 
-                    <p className="font-semibold text-neutral-900">
-                      $120.00
-                    </p>
-
-                  </div>
+    <p className="font-semibold text-neutral-900">
+      ${(product.price * product.quantity).toFixed(2)}
+    </p>
+  </div>
+))}
 
                   <div className="flex flex-wrap items-center justify-between gap-3">
                     <div className="flex items-center gap-2 text-xs text-neutral-500">
                       <CalendarDays size={15} />
-                      12 Nov 2026
+                      {order.orderDate}
                     </div>
 
                     <div className="flex items-center gap-2 text-xs font-medium text-neutral-500">
                       <Truck size={16} />
-                      Delivered Successfully
+                      {order.payment.paymentMethodName} , <h1>Payable amount after discount - <span >${order.totalAmount}</span></h1>
                     </div>
+
+                    <br />
+                
+                  {order.selectedAddress ? (
+  <p>
+    {order.selectedAddress.city},{" "}
+    {order.selectedAddress.state},{" "}
+    {order.selectedAddress.zipCode}
+  </p>
+) : (
+  <p>Address nahi hai</p>
+)}
+                
+                 
                   </div>
+
+                  
+                  
 
                 </div>
 
-                {/* Order 2 */}
-                <div className="rounded-xl border border-neutral-200 p-5">
 
-                  <div className="flex flex-wrap items-center justify-between gap-3">
-                    <div>
-                      <p className="text-xs text-neutral-400">Order ID</p>
-                      <h3 className="mt-1 text-sm font-semibold text-neutral-900">
-                        #ORD-2026-002
-                      </h3>
-                    </div>
-
-                    <span className="rounded-full bg-blue-50 px-3 py-1.5 text-xs font-semibold text-blue-700">
-                      Processing
-                    </span>
-                  </div>
-
-                  <div className="my-4 flex items-center gap-4 border-y border-neutral-100 py-4">
-
-                    <div className="h-16 w-16 overflow-hidden rounded-lg bg-neutral-100">
-                      <img
-                        src="https://placehold.co/100x100"
-                        alt="Product"
-                        className="h-full w-full object-cover"
-                      />
-                    </div>
-
-                    <div className="flex-1">
-                      <h4 className="text-sm font-semibold text-neutral-900">
-                        Smart Watch Series
-                      </h4>
-                      <p className="mt-1 text-xs text-neutral-500">
-                        Qty: 2 · Silver
-                      </p>
-                    </div>
-
-                    <p className="font-semibold text-neutral-900">
-                      $180.00
-                    </p>
-
-                  </div>
-
-                  <div className="flex flex-wrap items-center justify-between gap-3">
-                    <div className="flex items-center gap-2 text-xs text-neutral-500">
-                      <CalendarDays size={15} />
-                      16 Nov 2026
-                    </div>
-
-                    <div className="flex items-center gap-2 text-xs font-medium text-neutral-500">
-                      <CreditCard size={16} />
-                      Paid via UPI
-                    </div>
-                  </div>
-
-                </div>
+               
 
               </div>
+                })
+              }
             </section>
   )
 }

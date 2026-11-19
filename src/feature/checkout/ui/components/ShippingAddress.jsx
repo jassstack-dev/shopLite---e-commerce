@@ -1,34 +1,84 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Navigate } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
+import { addAddress, addSelectedAddress } from '../../store/addressSlice';
 
 const ShippingAddress = () => {
+  
   const { register, handleSubmit } = useForm();
-  const [address, setAddress] = useState(JSON.parse(localStorage.getItem('address'))||[])
-  console.log(address)
+  const {address, selectedAddress } = useSelector((state)=>state.address)
+  const [selectAddress, setSelectAddress] = useState(null)
+  const navigate = useNavigate()
+  const {cartItems} = useSelector((state)=>state.cart)
+  
+
+// console.log(selectAddress)
+console.log(selectedAddress)
+  const dispatch = useDispatch()
 
   
-  if(address){
-    return <Navigate to={'/payments'} />
-  }else{
-    return
-  }
+const handleAddressChange = (e) => {
+  const index = e.target.value;
+  setSelectAddress(index);
+
+  const selected = index === "" ? null : address[Number(index)];
+  dispatch(addSelectedAddress(selected));
+};
 
 
-  const onSubmit = (data) => {
-    console.log('Shipping Data:', data);
 
-    const arr = [...address, data]
-    setAddress(arr)
-    localStorage.setItem('address', JSON.stringify(arr))
-        alert('Shipping Address Submitted!');
-  };
+
+
+
+  
+
+
+ 
+
+ const onSubmit = (data) => {
+  // console.log('Shipping Data:', data);
+
+  dispatch(addAddress(data));
+
+  const arr = [...address, data];
+
+  localStorage.setItem('address', JSON.stringify(arr));
+
+  alert('Shipping Address Submitted!');
+};
 
   return (
     <div className="min-h-screen bg-gray-50 py-10 px-4 flex justify-center">
       <div className="max-w-4xl w-full bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
         <h2 className="text-xl font-bold text-gray-800 mb-6">Shipping Address</h2>
 
+        {address.length > 0 && (
+  <div className="mb-6">
+    <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-gray-500">
+      Select an Address
+    </label>
+
+     <select
+      value={selectAddress || ""}
+      onChange={handleAddressChange}
+      className="w-full rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 text-sm focus:border-blue-500 focus:outline-none"
+    >
+      <option value="">Select an address</option>
+
+      {address.map((item, index) => (
+        <option key={index} value={index}>
+          {item.firstName} {item.lastName} - {item.city}, {item.state}
+        </option>
+      ))}
+    </select>
+    {
+      selectAddress ? <button onClick={()=>navigate('/payments')} className='bg-red-200 m-2 p-1 cursor-pointer'>continue for payment</button> : <button className='bg-red-200 m-2 p-1 cursor-pointer'>select address</button>
+    }
+  </div>
+)}
+
+        <h2 className='text-2xl bg-amber-200 p-2 mb-2'>add Address</h2>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           {/* Name Row */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -142,7 +192,7 @@ const ShippingAddress = () => {
               type="submit"
               className="w-full md:w-auto px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-xl transition duration-200 text-sm shadow-sm"
             >
-              Continue to Shipping Method
+              Add address
             </button>
           </div>
         </form>
